@@ -11,6 +11,10 @@ CREATE DATABASE "potentStrengthDb"
     IS_TEMPLATE = False;
 
 
+
+
+
+
 CREATE TABLE "users" (
   userId SERIAL PRIMARY KEY UNIQUE,
   "userName" varchar,

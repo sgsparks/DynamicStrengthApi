@@ -8,6 +8,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/dynamicStrengh-API/pom.xml" />
+        <option value="$PROJECT_DIR$/dynamicStrength-API/pom.xml" />
       </list>
     </option>
   </component>
