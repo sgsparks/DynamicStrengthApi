@@ -9,7 +9,13 @@
       <list>
         <option value="$PROJECT_DIR$/dynamicStrengh-API/pom.xml" />
         <option value="$PROJECT_DIR$/dynamicStrength-API/pom.xml" />
+        <option value="$PROJECT_DIR$/SpringAPI/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/dynamicStrength-API/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="openjdk-21" project-jdk-type="JavaSDK">
