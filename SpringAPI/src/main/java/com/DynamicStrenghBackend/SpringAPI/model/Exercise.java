@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name ="excersise")
 public class Exercise {
 
-	@Column(name="exerciseName")
+	@Column(name="excersiseName")
 	private String exerciseName;
 	@Column(name="instructions")
 	private String instructions;
