@@ -5,22 +5,11 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name ="excersise")
+@Table(name ="exercise")
 public class Exercise {
-
-	@Column(name="excersiseName")
-	private String exerciseName;
-	@Column(name="instructions")
-	private String instructions;
-	@Column(name="bodyPart")
-	private String bodyPart;
-	@Column(name="target")
-	private String target;
-	@Column(name="secondary")
-	private List<String> secondary;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int exerciseId;
+	public Exercise() {
+		// default constructor
+	}
 
 
 	public Exercise(String exerciseName, String instructions, String bodyPart, String target, List<String> secondary, int exerciseId) {
@@ -31,6 +20,23 @@ public class Exercise {
 		this.secondary = secondary;
 		this.exerciseId = exerciseId;
 	}
+	@Column(name="\"exerciseName\"")
+	private String exerciseName;
+	@Column(name="instructions")
+	private String instructions;
+	@Column(name="\"bodyPart\"")
+	private String bodyPart;
+	@Column(name="target")
+	private String target;
+	@Column(name="secondary")
+	private List<String> secondary;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "\"exerciseId\"")
+	private int exerciseId;
+
+
+
 
 	public String getExerciseName() {
 		return exerciseName;

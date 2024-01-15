@@ -1,5 +1,8 @@
+-- Database: dynamicStrengthDB
 
-CREATE DATABASE "potentStrengthDb"
+-- DROP DATABASE IF EXISTS "dynamicStrengthDB";
+
+CREATE DATABASE "dynamicStrengthDB"
     WITH
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -14,7 +17,6 @@ CREATE DATABASE "potentStrengthDb"
 
 
 
-
 CREATE TABLE "users" (
   userId SERIAL PRIMARY KEY UNIQUE,
   "userName" varchar,
@@ -22,27 +24,27 @@ CREATE TABLE "users" (
   "createdAt" timestamp
 );
  
-CREATE TABLE "excersise" (
-  "excersiseName" varchar,
+CREATE TABLE "exercise" (
+  "exerciseName" varchar,
   "instructions" text,
   "bodyPart" varchar,
   "target" varchar,
-  "secondary" varchar,
+  "secondary" varchar[],
   "exerciseId" SERIAL PRIMARY KEY UNIQUE
 );
 
 CREATE TABLE "history" (
   "userName" varchar,
-  "excersiseName" varchar,
+  "exerciseName" varchar,
   "tempo" varchar,
   "prescribedReps" varchar,
-  "acutalReps" varchar,
+  "actualReps" varchar,
   "weight" int,
   "createdAt" date,
   "historyId" SERIAL PRIMARY KEY UNIQUE,
   "userId" int,
   "workoutId" int,
-	"prescribedExerciseid" int
+	"prescribedExerciseId" int
 );
 
 CREATE TABLE "prescribedExercise" (
@@ -50,7 +52,7 @@ CREATE TABLE "prescribedExercise" (
   "plannedTempo" varchar,
   "plannedReps" varchar,
   "notes" varchar,
-  "prescribedExerciseid" SERIAL PRIMARY KEY UNIQUE
+  "prescribedExerciseId" SERIAL PRIMARY KEY UNIQUE
 );
 
 CREATE TABLE "prescribedWorkout" (
@@ -65,6 +67,6 @@ ALTER TABLE "history" ADD FOREIGN KEY ("userId") REFERENCES "users" (userId);
 
 ALTER TABLE "prescribedWorkout" ADD FOREIGN KEY ("userId") REFERENCES "users" (userId);
 
-ALTER TABLE "history" ADD FOREIGN KEY ("prescribedExerciseid") REFERENCES "prescribedExercise" ("prescribedExerciseid");
+ALTER TABLE "history" ADD FOREIGN KEY ("prescribedExerciseId") REFERENCES "prescribedExercise" ("prescribedExerciseId");
 
 ALTER TABLE "history" ADD FOREIGN KEY ("workoutId") REFERENCES "prescribedWorkout" ("workoutId");
