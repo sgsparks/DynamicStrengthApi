@@ -1,8 +1,11 @@
 package com.DynamicStrenghBackend.SpringAPI.controller;
 
+import com.DynamicStrenghBackend.SpringAPI.exception.ResourceNotFoundException;
 import com.DynamicStrenghBackend.SpringAPI.model.Exercise;
 import com.DynamicStrenghBackend.SpringAPI.repository.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,16 +29,37 @@ public class ExerciseController {
 		return exerciseRepository.save(exercise);
 	}
 
-//	//Get exercise by name
-//	@GetMapping("/exercise/{exerciseName}")
-//	public ResponseEntity<Exercise> getExerciseByName(@PathVariable("exerciseName") String exerciseName) {
-//		try {
-//			Exercise exercise = exerciseRepository.findExerciseByName(exerciseName);
-//			return ResponseEntity.ok(exercise);
-//		} catch(Exception e) {
-//			 new ResourceNotFoundException("Exercise not exist with name :" + exerciseName + " exception: ");  e.printStackTrace();
-//		}
-//		return null;
-//	}
+	//Get exercise by name
+	@GetMapping("/exercises/byName/{exerciseName}")
+	public ResponseEntity<Exercise> getExerciseByName(@PathVariable("exerciseName") String exerciseName) {
+		try {
+			Exercise exercise = exerciseRepository.findExerciseByExerciseName(exerciseName);
+
+			if (exercise != null) {
+				return ResponseEntity.ok(exercise);
+			} else {
+				throw new ResourceNotFoundException("Exercise not found with name: " + exerciseName);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	@GetMapping("/exercises/target/{targetValue}")
+	public ResponseEntity<List<Exercise>> getExercisesByTarget(@PathVariable("targetValue") String target) {
+		try {
+			List<Exercise> exercises = exerciseRepository.findExercisesByTargetContaining(target);
+
+			if (!exercises.isEmpty()) {
+				return ResponseEntity.ok(exercises);
+			} else {
+				throw new ResourceNotFoundException("No exercises found for target: " + target);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
 
 }
