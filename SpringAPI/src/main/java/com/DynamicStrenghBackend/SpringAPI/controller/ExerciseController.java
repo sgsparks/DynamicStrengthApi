@@ -47,14 +47,30 @@ public class ExerciseController {
 	}
 
 	@GetMapping("/exercises/target/{targetValue}")
-	public ResponseEntity<List<Exercise>> getExercisesByTarget(@PathVariable("targetValue") String target) {
+	public ResponseEntity<List<Exercise>> getExercisesByTarget(@PathVariable("targetValue") String targetValue) {
 		try {
-			List<Exercise> exercises = exerciseRepository.findExercisesByTargetContaining(target);
+			List<Exercise> exercises = exerciseRepository.findExercisesByTargetContaining(targetValue);
 
 			if (!exercises.isEmpty()) {
 				return ResponseEntity.ok(exercises);
 			} else {
-				throw new ResourceNotFoundException("No exercises found for target: " + target);
+				throw new ResourceNotFoundException("No exercises found for target: " + targetValue);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+
+	@GetMapping("/exercises/bodyPart/{bodyPartValue}")
+	public ResponseEntity<List<Exercise>> getExercisesByBodyPart(@PathVariable("bodyPartValue") String bodyPartValue) {
+		try {
+			List<Exercise> exercises = exerciseRepository.findExercisesByBodyPartContaining(bodyPartValue);
+
+			if (!exercises.isEmpty()) {
+				return ResponseEntity.ok(exercises);
+			} else {
+				throw new ResourceNotFoundException("No exercises found for target: " + bodyPartValue);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
