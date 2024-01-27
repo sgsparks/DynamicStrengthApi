@@ -1,2 +1,2 @@
 # DynamicStrengthApi
-Api build with Spring Boot
+RESTful API built with Spring Boot
